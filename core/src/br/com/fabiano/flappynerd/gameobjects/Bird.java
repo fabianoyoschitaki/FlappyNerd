@@ -19,22 +19,21 @@ public class Bird {
     private int width;
     private int height;
 
-    private Circle boundingCircle;
+    private float originalY;
 
     private boolean isAlive;
+
+    private Circle boundingCircle;
 
     public Bird(float x, float y, int width, int height) {
         this.width = width;
         this.height = height;
+        this.originalY = y;
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
         acceleration = new Vector2(0, 460);
         boundingCircle = new Circle();
         isAlive = true;
-    }
-
-    public boolean isAlive() {
-        return isAlive;
     }
 
     public void update(float delta) {
@@ -75,6 +74,11 @@ public class Bird {
         }
     }
 
+    //????
+    public void updateReady(float runTime) {
+        position.y = 2 * (float) Math.sin(7 * runTime) + originalY;
+    }
+
     public boolean isFalling() {
         return velocity.y > 110;
     }
@@ -98,6 +102,16 @@ public class Bird {
     public void decelerate() {
         // We want the bird to stop accelerating downwards once it is dead.
         acceleration.y = 0;
+    }
+
+    public void onRestart(int y) {
+        rotation = 0;
+        position.y = y;
+        velocity.x = 0;
+        velocity.y = 0;
+        acceleration.x = 0;
+        acceleration.y = 460;
+        isAlive = true;
     }
 
     public float getX() {
@@ -124,13 +138,7 @@ public class Bird {
         return boundingCircle;
     }
 
-    public void onRestart(int y) {
-        rotation = 0;
-        position.y = y;
-        velocity.x = 0;
-        velocity.y = 0;
-        acceleration.x = 0;
-        acceleration.y = 460;
-        isAlive = true;
+    public boolean isAlive() {
+        return isAlive;
     }
 }
