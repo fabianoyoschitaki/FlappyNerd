@@ -7,9 +7,11 @@
 	<inherits name='Box2DLights' />
 	<inherits name='com.badlogic.ashley_gwt' />
 	<inherits name='com.badlogic.gdx.ai' />
+	<inherits name='aurelienribon.tweenengine'/>
 
 	<inherits name='FlappyNerdGame' />
 	<entry-point class='br.com.fabiano.flappynerd.client.HtmlLauncher' />
 	<set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>
 	<set-configuration-property name="gdx.assetpath" value="../android/assets" />
+	
 </module>

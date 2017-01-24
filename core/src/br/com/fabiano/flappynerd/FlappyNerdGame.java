@@ -9,14 +9,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import br.com.fabiano.flappynerd.helpers.AssetLoader;
 import br.com.fabiano.flappynerd.screen.GameScreen;
+import br.com.fabiano.flappynerd.screen.SplashScreen;
 
 public class FlappyNerdGame extends Game {
 
 	@Override
 	public void create() {
-		Gdx.app.log("ZBGame", "created");
 		AssetLoader.load();
-		setScreen(new GameScreen());
+		setScreen(new SplashScreen(this));
 	}
 
 	@Override

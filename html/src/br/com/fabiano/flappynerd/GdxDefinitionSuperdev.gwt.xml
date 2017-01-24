@@ -7,6 +7,7 @@
 	<inherits name='Box2DLights' />
 	<inherits name='com.badlogic.ashley_gwt' />
 	<inherits name='com.badlogic.gdx.ai' />
+	<inherits name='aurelienribon.tweenengine'/>
 
     <inherits name='br.com.fabiano.flappynerd.GdxDefinition' />
     
