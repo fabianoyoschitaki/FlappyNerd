@@ -1,5 +1,6 @@
 package br.com.fabiano.flappynerd;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -15,6 +16,7 @@ public class FlappyNerdGame extends Game {
 
 	@Override
 	public void create() {
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		Gdx.app.debug("FlappyNerdGame", "create()");
 		AssetLoader.load();
 		setScreen(new SplashScreen(this));

@@ -16,8 +16,11 @@ public class AssetLoader {
     public static Preferences prefs;
 
     public static Texture texture, logoTexture;
-    public static TextureRegion logo, zbLogo, bg, grass, bird, birdDown,
-            birdUp, skullUp, skullDown, bar, playButtonUp, playButtonDown;
+    public static TextureRegion logo, zbLogo,
+            bg, grass,
+            bird, birdDown, birdUp,
+            skullUp, skullDown, bar,
+            playButtonUp, playButtonDown;
 
     public static Animation birdAnimation;
 
@@ -30,6 +33,7 @@ public class AssetLoader {
         logoTexture = new Texture(Gdx.files.internal("data/logo.png"));
         logoTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        //fromX, fromY, toX, toY top-left -> bottom-right
         logo = new TextureRegion(logoTexture, 0, 0, 512, 114);
 
         texture = new Texture(Gdx.files.internal("data/texture.png"));
@@ -62,13 +66,15 @@ public class AssetLoader {
         birdAnimation = new Animation(0.06f, birds);
         birdAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
+        // sem flip aqui. Pois já carrega ao contrário
         skullUp = new TextureRegion(texture, 192, 0, 24, 14);
+
         // Create by flipping existing skullUp
         skullDown = new TextureRegion(skullUp);
+        // Caveira do cano de baixo. Inverte a imagem
         skullDown.flip(false, true);
 
         bar = new TextureRegion(texture, 136, 16, 22, 3);
-        bar.flip(false, true);
 
         dead = Gdx.audio.newSound(Gdx.files.internal("data/dead.wav"));
         flap = Gdx.audio.newSound(Gdx.files.internal("data/flap.wav"));
@@ -91,21 +97,34 @@ public class AssetLoader {
         Gdx.app.debug("AssetLoader", "dispose()");
         // We must dispose of the texture when we are finished.
         texture.dispose();
+        logoTexture.dispose();
+
+        // sons
         dead.dispose();
         flap.dispose();
         coin.dispose();
+
+        // fontes
         font.dispose();
         shadow.dispose();
     }
 
-    // Receives an integer and maps it to the String highScore in prefs
+    /**
+     * Recebe um int e atribui à pontuação mais alta
+     * 
+     * @param val
+     */
     public static void setHighScore(int val) {
         Gdx.app.debug("AssetLoader", "setHighScore()");
         prefs.putInteger("highScore", val);
         prefs.flush();
     }
 
-    // Retrieves the current high score
+    /**
+     * Obtém a pontuação mais alta
+     *
+     * @return
+     */
     public static int getHighScore() {
         Gdx.app.debug("AssetLoader", "getHighScore()");
         return prefs.getInteger("highScore");
