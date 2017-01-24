@@ -1,5 +1,6 @@
 package br.com.fabiano.flappynerd.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -20,6 +21,7 @@ public class SimpleButton {
 
     public SimpleButton(float x, float y, float width, float height,
                         TextureRegion buttonUp, TextureRegion buttonDown) {
+        Gdx.app.debug("SimpleButton", "Construtor()");
         this.x = x;
         this.y = y;
         this.width = width;
@@ -32,10 +34,12 @@ public class SimpleButton {
     }
 
     public boolean isClicked(int screenX, int screenY) {
+        Gdx.app.debug("SimpleButton", "isClicked()");
         return bounds.contains(screenX, screenY);
     }
 
     public void draw(SpriteBatch batcher) {
+        Gdx.app.debug("SimpleButton", "draw()");
         if (isPressed) {
             batcher.draw(buttonDown, x, y, width, height);
         } else {
@@ -44,17 +48,16 @@ public class SimpleButton {
     }
 
     public boolean isTouchDown(int screenX, int screenY) {
-
+        Gdx.app.debug("SimpleButton", "isTouchDown()");
         if (bounds.contains(screenX, screenY)) {
             isPressed = true;
             return true;
         }
-
         return false;
     }
 
     public boolean isTouchUp(int screenX, int screenY) {
-
+        Gdx.app.debug("SimpleButton", "isTouchUp()");
         // It only counts as a touchUp if the button is in a pressed state.
         if (bounds.contains(screenX, screenY) && isPressed) {
             isPressed = false;

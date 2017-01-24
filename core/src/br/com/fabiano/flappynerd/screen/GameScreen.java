@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
 
     // This is the constructor, not the class declaration
     public GameScreen() {
-
+        Gdx.app.debug("GameScreen", "Construtor()");
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
         float gameWidth = 136;
@@ -34,6 +34,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.app.debug("GameScreen", "render()");
         runTime += delta;
         world.update(delta);
         renderer.render(delta, runTime);
@@ -41,31 +42,31 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        Gdx.app.debug("GameScreen", "resize()");
     }
 
     @Override
     public void show() {
-        Gdx.app.log("GameScreen", "show called");
+        Gdx.app.debug("GameScreen", "show()");
     }
 
     @Override
     public void hide() {
-        Gdx.app.log("GameScreen", "hide called");
+        Gdx.app.debug("GameScreen", "hide()");
     }
 
     @Override
     public void pause() {
-        Gdx.app.log("GameScreen", "pause called");
+        Gdx.app.debug("GameScreen", "pause()");
     }
 
     @Override
     public void resume() {
-        Gdx.app.log("GameScreen", "resume called");
+        Gdx.app.debug("GameScreen", "resume()");
     }
 
     @Override
     public void dispose() {
-        // Leave blank
+        Gdx.app.debug("GameScreen", "dispose()");
     }
 }

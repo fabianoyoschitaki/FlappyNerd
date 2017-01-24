@@ -26,6 +26,7 @@ public class Bird {
     private Circle boundingCircle;
 
     public Bird(float x, float y, int width, int height) {
+        Gdx.app.debug("Bird", "Construtor()");
         this.width = width;
         this.height = height;
         this.originalY = y;
@@ -37,7 +38,7 @@ public class Bird {
     }
 
     public void update(float delta) {
-
+        Gdx.app.debug("Bird", "update()");
         velocity.add(acceleration.cpy().scl(delta));
 
         if (velocity.y > 200) {
@@ -76,18 +77,22 @@ public class Bird {
 
     //????
     public void updateReady(float runTime) {
+        Gdx.app.debug("Bird", "updateReady()");
         position.y = 2 * (float) Math.sin(7 * runTime) + originalY;
     }
 
     public boolean isFalling() {
+        Gdx.app.debug("Bird", "isFalling()");
         return velocity.y > 110;
     }
 
     public boolean shouldntFlap() {
+        Gdx.app.debug("Bird", "shouldntFlap()");
         return velocity.y > 70 || !isAlive;
     }
 
     public void onClick() {
+        Gdx.app.debug("Bird", "onClick()");
         if (isAlive) {
             AssetLoader.flap.play();
             velocity.y = -140;
@@ -95,16 +100,19 @@ public class Bird {
     }
 
     public void die() {
+        Gdx.app.debug("Bird", "die()");
         isAlive = false;
         velocity.y = 0;
     }
 
     public void decelerate() {
+        Gdx.app.debug("Bird", "decelerate()");
         // We want the bird to stop accelerating downwards once it is dead.
         acceleration.y = 0;
     }
 
     public void onRestart(int y) {
+        Gdx.app.debug("Bird", "onRestart()");
         rotation = 0;
         position.y = y;
         velocity.x = 0;
@@ -115,30 +123,37 @@ public class Bird {
     }
 
     public float getX() {
+        Gdx.app.debug("Bird", "getX()");
         return position.x;
     }
 
     public float getY() {
+        Gdx.app.debug("Bird", "getY()");
         return position.y;
     }
 
     public float getWidth() {
+        Gdx.app.debug("Bird", "getWidth()");
         return width;
     }
 
     public float getHeight() {
+        Gdx.app.debug("Bird", "getHeight()");
         return height;
     }
 
     public float getRotation() {
+        Gdx.app.debug("Bird", "getRotation()");
         return rotation;
     }
 
     public Circle getBoundingCircle() {
+        Gdx.app.debug("Bird", "getBoundingCircle()");
         return boundingCircle;
     }
 
     public boolean isAlive() {
+        Gdx.app.debug("Bird", "isAlive()");
         return isAlive;
     }
 }

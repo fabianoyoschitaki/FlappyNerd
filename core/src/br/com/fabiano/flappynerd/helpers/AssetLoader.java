@@ -26,6 +26,7 @@ public class AssetLoader {
     public static BitmapFont font, shadow;
 
     public static void load() {
+        Gdx.app.debug("AssetLoader", "load()");
         logoTexture = new Texture(Gdx.files.internal("data/logo.png"));
         logoTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
@@ -87,6 +88,7 @@ public class AssetLoader {
     }
 
     public static void dispose() {
+        Gdx.app.debug("AssetLoader", "dispose()");
         // We must dispose of the texture when we are finished.
         texture.dispose();
         dead.dispose();
@@ -98,12 +100,14 @@ public class AssetLoader {
 
     // Receives an integer and maps it to the String highScore in prefs
     public static void setHighScore(int val) {
+        Gdx.app.debug("AssetLoader", "setHighScore()");
         prefs.putInteger("highScore", val);
         prefs.flush();
     }
 
     // Retrieves the current high score
     public static int getHighScore() {
+        Gdx.app.debug("AssetLoader", "getHighScore()");
         return prefs.getInteger("highScore");
     }
 }

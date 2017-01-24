@@ -1,5 +1,6 @@
 package br.com.fabiano.flappynerd.gameobjects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -25,6 +26,7 @@ public class Pipe extends Scrollable {
     // constructor
     public Pipe(float x, float y, int width, int height, float scrollSpeed, float groundY) {
         super(x, y, width, height, scrollSpeed);
+        Gdx.app.debug("Pipe", "Construtor()");
         // Initialize a Random object for Random number generation
         r = new Random();
 
@@ -38,6 +40,7 @@ public class Pipe extends Scrollable {
 
     @Override
     public void update(float delta) {
+        Gdx.app.debug("Pipe", "update()");
         // Call the update method in the superclass (Scrollable)
         super.update(delta);
 
@@ -62,6 +65,7 @@ public class Pipe extends Scrollable {
 
     @Override
     public void reset(float newX) {
+        Gdx.app.debug("Pipe", "reset()");
         // Call the reset method in the superclass (Scrollable)
         super.reset(newX);
         // Change the height to a random number
@@ -72,30 +76,37 @@ public class Pipe extends Scrollable {
     }
 
     public boolean isScored() {
+        Gdx.app.debug("Pipe", "isScored()");
         return isScored;
     }
 
     public void setScored(boolean b) {
+        Gdx.app.debug("Pipe", "setScored()");
         isScored = b;
     }
 
     public Rectangle getSkullUp() {
+        Gdx.app.debug("Pipe", "getSkullUp()");
         return skullUp;
     }
 
     public Rectangle getSkullDown() {
+        Gdx.app.debug("Pipe", "getSkullDown()");
         return skullDown;
     }
 
     public Rectangle getBarUp() {
+        Gdx.app.debug("Pipe", "getBarUp()");
         return barUp;
     }
 
     public Rectangle getBarDown() {
+        Gdx.app.debug("Pipe", "getBarDown()");
         return barDown;
     }
 
     public boolean collides(Bird bird) {
+        Gdx.app.debug("Pipe", "collides()");
         //we begin by checking if the position.x is less than bird.getX + bird.getWidth,
         // because otherwise, collision is impossible. This is a very cheap check (it does not take much toll on performance).
         // Most of the time, this condition will fail, and we will not have to perform the more expensive checks.
@@ -109,6 +120,7 @@ public class Pipe extends Scrollable {
     }
 
     public void onRestart(float x, float scrollSpeed) {
+        Gdx.app.debug("Pipe", "onRestart()");
         velocity.x = scrollSpeed;
         reset(x);
     }

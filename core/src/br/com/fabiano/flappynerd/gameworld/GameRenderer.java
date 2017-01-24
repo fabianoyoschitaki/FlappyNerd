@@ -55,6 +55,7 @@ public class GameRenderer {
     private List<SimpleButton> menuButtons;
 
     public GameRenderer(GameWorld world, int gameHeight, int midPointY) {
+        Gdx.app.debug("GameRenderer", "Construtor()");
         myWorld = world;
 
         this.midPointY = midPointY;
@@ -77,6 +78,7 @@ public class GameRenderer {
 
     //????
     private void setupTweens() {
+        Gdx.app.debug("GameRenderer", "setupTweens()");
         Tween.registerAccessor(Value.class, new ValueAccessor());
         manager = new TweenManager();
         Tween.to(alpha, -1, .5f).target(0).ease(TweenEquations.easeOutQuad)
@@ -84,6 +86,7 @@ public class GameRenderer {
     }
 
     private void initGameObjects() {
+        Gdx.app.debug("GameRenderer", "initGameObjects()");
         bird = myWorld.getBird();
         scroller = myWorld.getScroller();
         frontGrass = scroller.getFrontGrass();
@@ -94,6 +97,7 @@ public class GameRenderer {
     }
 
     private void initAssets() {
+        Gdx.app.debug("GameRenderer", "initAssets()");
         bg = AssetLoader.bg;
         grass = AssetLoader.grass;
         birdAnimation = AssetLoader.birdAnimation;
@@ -104,6 +108,7 @@ public class GameRenderer {
     }
 
     private void drawGrass() {
+        Gdx.app.debug("GameRenderer", "drawGrass()");
         // Draw the grass
         batcher.draw(grass, frontGrass.getX(), frontGrass.getY(),
                 frontGrass.getWidth(), frontGrass.getHeight());
@@ -112,9 +117,7 @@ public class GameRenderer {
     }
 
     private void drawSkulls() {
-        // Temporary code! Sorry about the mess :)
-        // We will fix this when we finish the Pipe class.
-
+        Gdx.app.debug("GameRenderer", "drawSkulls()");
         batcher.draw(skullUp, pipe1.getX() - 1,
                 pipe1.getY() + pipe1.getHeight() - 14, 24, 14);
         batcher.draw(skullDown, pipe1.getX() - 1,
@@ -132,8 +135,7 @@ public class GameRenderer {
     }
 
     private void drawPipes() {
-        // Temporary code! Sorry about the mess :)
-        // We will fix this when we finish the Pipe class.
+        Gdx.app.debug("GameRenderer", "drawPipes()");
         batcher.draw(bar, pipe1.getX(), pipe1.getY(), pipe1.getWidth(),
                 pipe1.getHeight());
         batcher.draw(bar, pipe1.getX(), pipe1.getY() + pipe1.getHeight() + 45,
@@ -151,13 +153,14 @@ public class GameRenderer {
     }
 
     private void drawBirdCentered(float runTime) {
+        Gdx.app.debug("GameRenderer", "drawBirdCentered()");
         batcher.draw((TextureRegion) birdAnimation.getKeyFrame(runTime), 59, bird.getY() - 15,
                 bird.getWidth() / 2.0f, bird.getHeight() / 2.0f,
                 bird.getWidth(), bird.getHeight(), 1, 1, bird.getRotation());
     }
 
     private void drawBird(float runTime) {
-
+        Gdx.app.debug("GameRenderer", "drawBird()");
         if (bird.shouldntFlap()) {
             batcher.draw(birdMid, bird.getX(), bird.getY(),
                     bird.getWidth() / 2.0f, bird.getHeight() / 2.0f,
@@ -173,6 +176,7 @@ public class GameRenderer {
     }
 
     private void drawMenuUI() {
+        Gdx.app.debug("GameRenderer", "drawMenuUI()");
         batcher.draw(AssetLoader.zbLogo, 136 / 2 - 56, midPointY - 50,
                 AssetLoader.zbLogo.getRegionWidth() / 1.2f,
                 AssetLoader.zbLogo.getRegionHeight() / 1.2f);
@@ -180,10 +184,10 @@ public class GameRenderer {
         for (SimpleButton button : menuButtons) {
             button.draw(batcher);
         }
-
     }
 
     public void render(float delta, float runTime) {
+        Gdx.app.debug("GameRenderer", "render()");
         // Fill the entire screen with black, to prevent potential flickering.
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -243,6 +247,7 @@ public class GameRenderer {
     }
 
     private void drawScore() {
+        Gdx.app.debug("GameRenderer", "drawScore()");
         int length = ("" + myWorld.getScore()).length();
         AssetLoader.shadow.draw(batcher, "" + myWorld.getScore(),
                 68 - (3 * length), midPointY - 82);
@@ -251,6 +256,7 @@ public class GameRenderer {
     }
 
     private void drawTransition(float delta) {
+        Gdx.app.debug("GameRenderer", "drawTransition()");
         if (alpha.getValue() > 0) {
             manager.update(delta);
             Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -265,6 +271,7 @@ public class GameRenderer {
     }
 
     private void showRedCollisionRectangles() {
+        Gdx.app.debug("GameRenderer", "showRedCollisionRectangles()");
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.circle(bird.getBoundingCircle().x, bird.getBoundingCircle().y, bird.getBoundingCircle().radius);

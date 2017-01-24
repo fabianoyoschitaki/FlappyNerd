@@ -1,5 +1,6 @@
 package br.com.fabiano.flappynerd.helpers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
@@ -29,6 +30,7 @@ public class InputHandler implements InputProcessor {
 
     // Ask for a reference to the Bird when InputHandler is created.
     public InputHandler(GameWorld myWorld, float scaleFactorX, float scaleFactorY) {
+        Gdx.app.debug("InputHandler", "Construtor()");
         // myBird now represents the gameWorld's bird.
         this.myWorld = myWorld;
         myBird = myWorld.getBird();
@@ -48,6 +50,7 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Gdx.app.debug("InputHandler", "touchDown()");
         screenX = scaleX(screenX);
         screenY = scaleY(screenY);
         System.out.println(screenX + " " + screenY);
@@ -68,6 +71,8 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        Gdx.app.debug("InputHandler", "touchUp()");
+
         screenX = scaleX(screenX);
         screenY = scaleY(screenY);
 
@@ -83,6 +88,7 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        Gdx.app.debug("InputHandler", "keyDown()");
 
         // Can now use Space Bar to play the game
         if (keycode == Input.Keys.SPACE) {
@@ -130,14 +136,17 @@ public class InputHandler implements InputProcessor {
     }
 
     private int scaleX(int screenX) {
+        Gdx.app.debug("InputHandler", "scaleX()");
         return (int) (screenX / scaleFactorX);
     }
 
     private int scaleY(int screenY) {
+        Gdx.app.debug("InputHandler", "scaleY()");
         return (int) (screenY / scaleFactorY);
     }
 
     public List<SimpleButton> getMenuButtons() {
+        Gdx.app.debug("InputHandler", "getMenuButtons()");
         return menuButtons;
     }
 }

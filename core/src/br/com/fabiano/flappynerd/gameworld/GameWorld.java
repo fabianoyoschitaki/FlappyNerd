@@ -27,6 +27,7 @@ public class GameWorld {
     }
 
     public GameWorld(int midPointY) {
+        Gdx.app.debug("GameWorld", "Construtor()");
         currentState = GameState.MENU;
         this.midPointY = midPointY;
         bird = new Bird(33, midPointY - 5, 17, 12);
@@ -36,6 +37,7 @@ public class GameWorld {
     }
 
     public void update(float delta) {
+        Gdx.app.debug("GameWorld", "update()");
         runTime += delta;
         switch (currentState) {
             case READY:
@@ -53,11 +55,14 @@ public class GameWorld {
     }
 
     private void updateReady(float delta) {
+        Gdx.app.debug("GameWorld", "updateReady()");
         bird.updateReady(runTime);
         scroller.updateReady(delta);
     }
 
     public void updateRunning(float delta) {
+        Gdx.app.debug("GameWorld", "updateRunning()");
+
         // Add a delta cap so that if our game takes too long
         // to update, we will not break our collision detection.
         if (delta > .15f) {
@@ -88,34 +93,42 @@ public class GameWorld {
     }
 
     public Bird getBird() {
+        Gdx.app.debug("GameWorld", "getBird()");
         return bird;
     }
 
     public int getMidPointY() {
+        Gdx.app.debug("GameWorld", "getMidPointY()");
         return midPointY;
     }
 
     public ScrollHandler getScroller() {
+        Gdx.app.debug("GameWorld", "getScroller()");
         return scroller;
     }
 
     public int getScore() {
+        Gdx.app.debug("GameWorld", "getScore()");
         return score;
     }
 
     public void addScore(int increment) {
+        Gdx.app.debug("GameWorld", "addScore()");
         score += increment;
     }
 
     public void start() {
+        Gdx.app.debug("GameWorld", "start()");
         currentState = GameState.RUNNING;
     }
 
     public void ready() {
+        Gdx.app.debug("GameWorld", "ready()");
         currentState = GameState.READY;
     }
 
     public void restart() {
+        Gdx.app.debug("GameWorld", "restart()");
         currentState = GameState.READY;
         score = 0;
         bird.onRestart(midPointY - 5);
@@ -124,22 +137,27 @@ public class GameWorld {
     }
 
     public boolean isReady() {
+        Gdx.app.debug("GameWorld", "isReady()");
         return currentState == GameState.READY;
     }
 
     public boolean isGameOver() {
+        Gdx.app.debug("GameWorld", "isGameOver()");
         return currentState == GameState.GAMEOVER;
     }
 
     public boolean isHighScore() {
+        Gdx.app.debug("GameWorld", "isHighScore()");
         return currentState == GameState.HIGHSCORE;
     }
 
     public boolean isMenu() {
+        Gdx.app.debug("GameWorld", "isMenu()");
         return currentState == GameState.MENU;
     }
 
     public boolean isRunning() {
+        Gdx.app.debug("GameWorld", "isRunning()");
         return currentState == GameState.RUNNING;
     }
 }

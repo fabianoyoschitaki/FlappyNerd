@@ -1,5 +1,6 @@
 package br.com.fabiano.flappynerd.TweenAccessors;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import aurelienribon.tweenengine.TweenAccessor;
@@ -14,6 +15,7 @@ public class SpriteAccessor implements TweenAccessor<Sprite> {
 
     @Override
     public int getValues(Sprite target, int tweenType, float[] returnValues) {
+        Gdx.app.debug("SpriteAccessor", "getValues()");
         switch (tweenType) {
             case ALPHA:
                 returnValues[0] = target.getColor().a;
@@ -25,6 +27,7 @@ public class SpriteAccessor implements TweenAccessor<Sprite> {
 
     @Override
     public void setValues(Sprite target, int tweenType, float[] newValues) {
+        Gdx.app.debug("SpriteAccessor", "setValues()");
         switch (tweenType) {
             case ALPHA:
                 target.setColor(1, 1, 1, newValues[0]);

@@ -15,12 +15,14 @@ public class FlappyNerdGame extends Game {
 
 	@Override
 	public void create() {
+		Gdx.app.debug("FlappyNerdGame", "create()");
 		AssetLoader.load();
 		setScreen(new SplashScreen(this));
 	}
 
 	@Override
 	public void dispose() {
+		Gdx.app.debug("FlappyNerdGame", "dispose()");
 		super.dispose();
 		AssetLoader.dispose();
 	}

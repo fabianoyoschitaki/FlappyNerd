@@ -1,5 +1,7 @@
 package br.com.fabiano.flappynerd.gameobjects;
 
+import com.badlogic.gdx.Gdx;
+
 import br.com.fabiano.flappynerd.gameworld.GameWorld;
 import br.com.fabiano.flappynerd.helpers.AssetLoader;
 
@@ -23,6 +25,8 @@ public class ScrollHandler {
 
     // Constructor receives a float that tells us where we need to create our Grass and Pipe objects.
     public ScrollHandler(GameWorld gameWorld, float yPos) {
+        Gdx.app.debug("ScrollHandler", "Construtor()");
+
         this.gameWorld = gameWorld;
         frontGrass = new Grass(0, yPos, 143, 11, SCROLL_SPEED);
         backGrass = new Grass(frontGrass.getTailX(), yPos, 143, 11, SCROLL_SPEED);
@@ -34,6 +38,7 @@ public class ScrollHandler {
 
     //??
     public void updateReady(float delta) {
+        Gdx.app.debug("ScrollHandler", "updateReady()");
         frontGrass.update(delta);
         backGrass.update(delta);
 
@@ -47,6 +52,7 @@ public class ScrollHandler {
     }
 
     public void update(float delta) {
+        Gdx.app.debug("ScrollHandler", "update()");
         // Update our objects
         frontGrass.update(delta);
         backGrass.update(delta);
@@ -73,6 +79,7 @@ public class ScrollHandler {
     }
 
     public void stop() {
+        Gdx.app.debug("ScrollHandler", "stop()");
         frontGrass.stop();
         backGrass.stop();
         pipe1.stop();
@@ -81,6 +88,7 @@ public class ScrollHandler {
     }
 
     public boolean collides(Bird bird) {
+        Gdx.app.debug("ScrollHandler", "collides()");
         if (!pipe1.isScored() && pipe1.getX() + (pipe1.getWidth() / 2) < bird.getX() + bird.getWidth()) {
             addScore(1);
             pipe1.setScored(true);
@@ -98,31 +106,38 @@ public class ScrollHandler {
     }
 
     private void addScore(int increment) {
+        Gdx.app.debug("ScrollHandler", "addScore()");
         gameWorld.addScore(increment);
     }
 
     // The getters for our five instance variables
     public Grass getFrontGrass() {
+        Gdx.app.debug("ScrollHandler", "getFrontGrass()");
         return frontGrass;
     }
 
     public Grass getBackGrass() {
+        Gdx.app.debug("ScrollHandler", "getBackGrass()");
         return backGrass;
     }
 
     public Pipe getPipe1() {
+        Gdx.app.debug("ScrollHandler", "getPipe1()");
         return pipe1;
     }
 
     public Pipe getPipe2() {
+        Gdx.app.debug("ScrollHandler", "getPipe2()");
         return pipe2;
     }
 
     public Pipe getPipe3() {
+        Gdx.app.debug("ScrollHandler", "getPipe3()");
         return pipe3;
     }
 
     public void onRestart() {
+        Gdx.app.debug("ScrollHandler", "onRestart()");
         frontGrass.onRestart(0, SCROLL_SPEED);
         backGrass.onRestart(frontGrass.getTailX(), SCROLL_SPEED);
         pipe1.onRestart(210, SCROLL_SPEED);

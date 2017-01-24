@@ -26,11 +26,13 @@ public class SplashScreen implements Screen {
     private FlappyNerdGame game;
 
     public SplashScreen(FlappyNerdGame game) {
+        Gdx.app.debug("SplashScreen", "Construtor()");
         this.game = game;
     }
 
     @Override
     public void show() {
+        Gdx.app.debug("SplashScreen", "show()");
         sprite = new Sprite(AssetLoader.logo);
         sprite.setColor(1, 1, 1, 0);
 
@@ -47,6 +49,7 @@ public class SplashScreen implements Screen {
     }
 
     private void setupTween() {
+        Gdx.app.debug("SplashScreen", "setupTween()");
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
         manager = new TweenManager();
 
@@ -65,6 +68,7 @@ public class SplashScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.app.debug("SplashScreen", "render()");
         manager.update(delta);
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -75,31 +79,27 @@ public class SplashScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        Gdx.app.debug("SplashScreen", "resize()");
     }
 
     @Override
     public void hide() {
-        // TODO Auto-generated method stub
-
+        Gdx.app.debug("SplashScreen", "hide()");
     }
 
     @Override
     public void pause() {
-        // TODO Auto-generated method stub
-
+        Gdx.app.debug("SplashScreen", "pause()");
     }
 
     @Override
     public void resume() {
-        // TODO Auto-generated method stub
-
+        Gdx.app.debug("SplashScreen", "resume()");
     }
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
-
+        Gdx.app.debug("SplashScreen", "dispose()");
     }
 
 }
