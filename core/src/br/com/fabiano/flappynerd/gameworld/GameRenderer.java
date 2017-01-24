@@ -243,7 +243,6 @@ public class GameRenderer {
     }
 
     private void drawScore() {
-        Gdx.app.log("GameRenderer", "drawScore");
         int length = ("" + myWorld.getScore()).length();
         AssetLoader.shadow.draw(batcher, "" + myWorld.getScore(),
                 68 - (3 * length), midPointY - 82);
