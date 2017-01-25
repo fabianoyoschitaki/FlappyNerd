@@ -1,152 +1,137 @@
 package br.com.fabiano.flappynerd.helpers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
 
 import br.com.fabiano.flappynerd.gameobjects.Bird;
 import br.com.fabiano.flappynerd.gameworld.GameWorld;
 import br.com.fabiano.flappynerd.ui.SimpleButton;
 
-/**
- * Created by F0113091 on 20/01/2017.
- */
-
 public class InputHandler implements InputProcessor {
-    private Bird myBird;
+	private Bird myBird;
+	private GameWorld myWorld;
 
-    //Our InputHandler needs a reference to our GameWorld object,
-    // so that we can determine what the current GameState is and handle touches correctly.
-    private GameWorld myWorld;
+	private List<SimpleButton> menuButtons;
 
-    //TweenAccessor
-    private List<SimpleButton> menuButtons;
-    private SimpleButton playButton;
-    private float scaleFactorX;
-    private float scaleFactorY;
+	private SimpleButton playButton;
 
-    // Ask for a reference to the Bird when InputHandler is created.
-    public InputHandler(GameWorld myWorld, float scaleFactorX, float scaleFactorY) {
-        Gdx.app.debug("InputHandler", "Construtor()");
-        // myBird now represents the gameWorld's bird.
-        this.myWorld = myWorld;
-        myBird = myWorld.getBird();
+	private float scaleFactorX;
+	private float scaleFactorY;
 
-        int midPointY = myWorld.getMidPointY();
+	public InputHandler(GameWorld myWorld, float scaleFactorX,
+			float scaleFactorY) {
+		this.myWorld = myWorld;
+		myBird = myWorld.getBird();
 
-        this.scaleFactorX = scaleFactorX;
-        this.scaleFactorY = scaleFactorY;
+		int midPointY = myWorld.getMidPointY();
 
-        menuButtons = new ArrayList<SimpleButton>();
-        playButton = new SimpleButton(
-                136 / 2 - (AssetLoader.playButtonUp.getRegionWidth() / 2),
-                midPointY + 50, 29, 16, AssetLoader.playButtonUp,
-                AssetLoader.playButtonDown);
-        menuButtons.add(playButton);
-    }
+		this.scaleFactorX = scaleFactorX;
+		this.scaleFactorY = scaleFactorY;
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.debug("InputHandler", "touchDown()");
-        screenX = scaleX(screenX);
-        screenY = scaleY(screenY);
-        System.out.println(screenX + " " + screenY);
-        if (myWorld.isMenu()) {
-            playButton.isTouchDown(screenX, screenY);
-        } else if (myWorld.isReady()) {
-            myWorld.start();
-        }
+		menuButtons = new ArrayList<SimpleButton>();
+		playButton = new SimpleButton(
+				136 / 2 - (AssetLoader.playButtonUp.getRegionWidth() / 2),
+				midPointY + 50, 29, 16, AssetLoader.playButtonUp,
+				AssetLoader.playButtonDown);
+		menuButtons.add(playButton);
+	}
 
-        myBird.onClick();
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		screenX = scaleX(screenX);
+		screenY = scaleY(screenY);
 
-        if (myWorld.isGameOver() || myWorld.isHighScore()) {
-            myWorld.restart();
-        }
+		if (myWorld.isMenu()) {
+			playButton.isTouchDown(screenX, screenY);
+		} else if (myWorld.isReady()) {
+			myWorld.start();
+			myBird.onClick();
+		} else if (myWorld.isRunning()) {
+			myBird.onClick();
+		}
 
-        return true;
-    }
+		if (myWorld.isGameOver() || myWorld.isHighScore()) {
+			myWorld.restart();
+		}
 
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.debug("InputHandler", "touchUp()");
+		return true;
+	}
 
-        screenX = scaleX(screenX);
-        screenY = scaleY(screenY);
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		screenX = scaleX(screenX);
+		screenY = scaleY(screenY);
 
-        if (myWorld.isMenu()) {
-            if (playButton.isTouchUp(screenX, screenY)) {
-                myWorld.ready();
-                return true;
-            }
-        }
+		if (myWorld.isMenu()) {
+			if (playButton.isTouchUp(screenX, screenY)) {
+				myWorld.ready();
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Override
-    public boolean keyDown(int keycode) {
-        Gdx.app.debug("InputHandler", "keyDown()");
+	@Override
+	public boolean keyDown(int keycode) {
 
-        // Can now use Space Bar to play the game
-        if (keycode == Input.Keys.SPACE) {
+		// Can now use Space Bar to play the game
+		if (keycode == Keys.SPACE) {
 
-            if (myWorld.isMenu()) {
-                myWorld.ready();
-            } else if (myWorld.isReady()) {
-                myWorld.start();
-            }
+			if (myWorld.isMenu()) {
+				myWorld.ready();
+			} else if (myWorld.isReady()) {
+				myWorld.start();
+			}
 
-            myBird.onClick();
+			myBird.onClick();
 
-            if (myWorld.isGameOver() || myWorld.isHighScore()) {
-                myWorld.restart();
-            }
+			if (myWorld.isGameOver() || myWorld.isHighScore()) {
+				myWorld.restart();
+			}
 
-        }
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
 
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
+	@Override
+	public boolean keyTyped(char character) {
+		return false;
+	}
 
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
+	}
 
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
+	}
 
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
-    }
+	@Override
+	public boolean scrolled(int amount) {
+		return false;
+	}
 
-    private int scaleX(int screenX) {
-        Gdx.app.debug("InputHandler", "scaleX()");
-        return (int) (screenX / scaleFactorX);
-    }
+	private int scaleX(int screenX) {
+		return (int) (screenX / scaleFactorX);
+	}
 
-    private int scaleY(int screenY) {
-        Gdx.app.debug("InputHandler", "scaleY()");
-        return (int) (screenY / scaleFactorY);
-    }
+	private int scaleY(int screenY) {
+		return (int) (screenY / scaleFactorY);
+	}
 
-    public List<SimpleButton> getMenuButtons() {
-        Gdx.app.debug("InputHandler", "getMenuButtons()");
-        return menuButtons;
-    }
+	public List<SimpleButton> getMenuButtons() {
+		return menuButtons;
+	}
 }
