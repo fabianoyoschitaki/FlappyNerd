@@ -37,8 +37,12 @@ public class SplashScreen implements Screen {
 		float scale = desiredWidth / sprite.getWidth();
 
 		sprite.setSize(sprite.getWidth() * scale, sprite.getHeight() * scale);
-		sprite.setPosition((width / 2) - (sprite.getWidth() / 2), (height / 2)
-				- (sprite.getHeight() / 2));
+
+		float logoPositionX = (width / 2) - (sprite.getWidth() / 2);
+		float logoPositionY = (height / 2) - (sprite.getHeight() / 2);
+
+		//posição de sprite X (0 = extremo esquerdo) e Y (0 = extremo baixo)
+		sprite.setPosition(logoPositionX, logoPositionY);
 		setupTween();
 		batcher = new SpriteBatch();
 	}
@@ -54,10 +58,13 @@ public class SplashScreen implements Screen {
 			}
 		};
 
-		Tween.to(sprite, SpriteAccessor.ALPHA, .8f).target(1)
-				.ease(TweenEquations.easeInOutQuad).repeatYoyo(1, .4f)
-				.setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE)
-				.start(manager);
+		Tween.to(sprite, SpriteAccessor.ALPHA, .8f)
+			.target(1)
+			.ease(TweenEquations.easeInOutQuad)
+			.repeatYoyo(1, .4f)
+			.setCallback(cb)
+			.setCallbackTriggers(TweenCallback.COMPLETE)
+			.start(manager);
 	}
 
 	@Override
