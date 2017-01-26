@@ -47,6 +47,7 @@ public class SplashScreen implements Screen {
 		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 		manager = new TweenManager();
 
+		//callback para abrir tela principal do jogo
 		TweenCallback cb = new TweenCallback() {
 			@Override
 			public void onEvent(int type, BaseTween<?> source) {
@@ -54,10 +55,13 @@ public class SplashScreen implements Screen {
 			}
 		};
 
-		Tween.to(sprite, SpriteAccessor.ALPHA, .8f).target(1)
-				.ease(TweenEquations.easeInOutQuad).repeatYoyo(1, .4f)
-				.setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE)
-				.start(manager);
+		Tween.to(sprite, SpriteAccessor.ALPHA, .8f)
+			.target(1)
+			.ease(TweenEquations.easeInOutQuad)
+			.repeatYoyo(1, .4f)
+			.setCallback(cb)
+			.setCallbackTriggers(TweenCallback.COMPLETE)
+			.start(manager);
 	}
 
 	@Override
