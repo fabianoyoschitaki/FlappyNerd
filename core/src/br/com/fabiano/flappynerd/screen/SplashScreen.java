@@ -51,6 +51,7 @@ public class SplashScreen implements Screen {
 		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 		manager = new TweenManager();
 
+		//callback para abrir tela principal do jogo
 		TweenCallback cb = new TweenCallback() {
 			@Override
 			public void onEvent(int type, BaseTween<?> source) {
