@@ -22,10 +22,10 @@ public class AssetLoader {
 
 	public static void load() {
 
-		logoTexture = new Texture(Gdx.files.internal("data/fsylogo.png"));
+		logoTexture = new Texture(Gdx.files.internal("data/logotry.png"));
 		logoTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
-		logo = new TextureRegion(logoTexture, 0, 0, 120, 120);
+		logo = new TextureRegion(logoTexture, 0, 0, 248, 340);
 
 		texture = new Texture(Gdx.files.internal("data/texture.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
